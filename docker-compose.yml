@@ -1,0 +1,51 @@
+services:
+  app:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: app
+    working_dir: /app
+    volumes:
+      - .:/app
+    networks:
+      - app-network
+    depends_on:
+      - db
+    environment:
+      PHP_IDE_CONFIG: "serverName=Docker"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "9003:9003"
+
+  db:
+    image: mariadb:10.11
+    container_name: db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_DATABASE:-myapp}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
+      MARIADB_PASSWORD: ${DB_PASSWORD:-secret}
+      MARIADB_USER: ${DB_USERNAME:-user}
+      MARIADB_AUTO_UPGRADE: "1"
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - ./docker/mariadb/data:/var/lib/mysql
+    command: 
+      - --innodb-use-native-aio=0
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb-large-prefix=1
+      - --innodb-file-format=Barracuda
+      - --innodb-file-per-table=1
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local

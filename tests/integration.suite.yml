@@ -1,0 +1,7 @@
+actor: IntegrationTester
+modules:
+  enabled:
+    - Asserts
+    - \Helper\Integration
+paths:
+  tests: tests/Integration

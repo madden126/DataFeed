@@ -1,0 +1,18 @@
+# Doctrine Migrations Configuration
+
+# Table storage configuration
+table_storage:
+  table_name: doctrine_migration_versions
+  version_column_name: version
+  version_column_length: 191
+  executed_at_column_name: executed_at
+
+# Migration classes configuration
+migrations_paths:
+  'App\Database\Migrations': 'src/Database/Migrations'
+
+# Transaction wrapping
+all_or_nothing: true
+
+# Platform checking
+check_database_platform: true 

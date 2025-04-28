@@ -1,0 +1,31 @@
+# Docker
+docker/mariadb/data/
+.docker-sync
+docker-compose.override.yml
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Dependencies
+/vendor/
+composer.lock
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+php_errors.log
+
+# Cache
+*.cache
+.phpunit.result.cache
