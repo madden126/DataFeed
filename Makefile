@@ -19,6 +19,10 @@ setup:
 import:
 	docker-compose exec -T app php bin/process-csv.php src/feed.csv
 
+# Import big CSV file
+import-big:
+	docker-compose exec -T app php bin/process-csv.php src/feedBig.csv
+
 # Process a specific batch
 process-batch:
 	@if [ -z "$(BATCH)" ]; then \

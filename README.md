@@ -2,6 +2,15 @@
 
 A PHP application to process product data from CSV files and import them into a MySQL database. The application is designed to handle large CSV files efficiently using batch processing.
 
+## Features
+
+- **Eloquent ORM**: Modern database interactions with Laravel's Eloquent ORM
+- **Doctrine Migrations**: Database schema version control and migrations
+- **PHPStan**: Static analysis tool for PHP code quality
+- **Codeception**: Advanced testing framework for unit and integration tests
+- **Batch Processing**: Efficient handling of large CSV files
+- **Docker Integration**: Containerized development environment
+
 ## Requirements
 
 - PHP 8.4
@@ -13,9 +22,8 @@ A PHP application to process product data from CSV files and import them into a 
 The project includes a Makefile for simplified operation:
 
 ## CSV Files in project
-- feed.csv (100 entries)
-- feedBig.csv (500,000 entries)
-
+- `feed.csv`: Sample file with 100 entries for quick testing
+- `feedBig.csv`: Large file with 500,000 entries for performance testing and batch processing
 
 ```bash
 # First time setup (creates directories, starts containers)
@@ -38,13 +46,13 @@ make view-data
 # See total number of records in the database
 make count-data
 
-# Run unit tests
+# Run unit tests with Codeception
 make test-unit
 
-# Run integration tests
+# Run integration tests with Codeception
 make test-integration
 
-# do a codebase analyzse with PHPStan
+# Run static analysis with PHPStan
 make analyse-phpstan
 
 # Clean up everything (stops containers, removes data)
@@ -91,6 +99,26 @@ make clean
    ```bash
    docker-compose exec app vendor/bin/doctrine-migrations migrate --no-interaction
    ```
+
+## Development Tools
+
+### Eloquent ORM
+The application uses Laravel's Eloquent ORM for database operations. Models are located in the `src/Models` directory.
+
+### Doctrine Migrations
+Database schema changes are managed through Doctrine Migrations. Migration files are stored in `src/Database/Migrations`.
+
+### PHPStan
+Static analysis is performed using PHPStan. Run analysis with:
+```bash
+make analyse-phpstan
+```
+
+### Codeception
+Testing is handled by Codeception framework:
+- Unit tests: `tests/unit`
+- Integration tests: `tests/integration`
+- Run tests with: `make test-unit` or `make test-integration`
 
 ## Docker Configuration
 
